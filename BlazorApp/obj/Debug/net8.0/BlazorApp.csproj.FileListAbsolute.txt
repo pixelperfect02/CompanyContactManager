@@ -27,4 +27,3 @@
 /Users/archieverma/Desktop/CompanyContactManager/BlazorApp/obj/Debug/net8.0/BlazorApp.pdb
 /Users/archieverma/Desktop/CompanyContactManager/BlazorApp/obj/Debug/net8.0/BlazorApp.genruntimeconfig.cache
 /Users/archieverma/Desktop/CompanyContactManager/BlazorApp/obj/Debug/net8.0/ref/BlazorApp.dll
-/Users/archieverma/Desktop/CompanyContactManager/BlazorApp/obj/Debug/net8.0/scopedcss/Components/Layout/NavMenu.razor.rz.scp.css
