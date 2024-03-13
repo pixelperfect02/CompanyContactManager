@@ -10,15 +10,15 @@ main[b-fekawvbbds] {
 }
 
 .sidebar[b-fekawvbbds] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-image: linear-gradient(180deg, rgb(235, 19, 19) 0%, #ca0505 70%);
 }
 
 .top-row[b-fekawvbbds] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
+    background-color: #f80000;
+    border-bottom: 1px solid #da0d0d;
     justify-content: flex-end;
     height: 3.5rem;
-    display: flex;
+    display: flex;s
     align-items: center;
 }
 
@@ -78,7 +78,7 @@ main[b-fekawvbbds] {
 }
 
 #blazor-error-ui[b-fekawvbbds] {
-    background: lightyellow;
+    background: rgb(217, 217, 17);
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
     display: none;
@@ -101,16 +101,17 @@ main[b-fekawvbbds] {
     cursor: pointer;
     width: 3.5rem;
     height: 2.5rem;
-    color: white;
+    color: rgb(64, 32, 32);
     position: absolute;
     top: 0.5rem;
     right: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(24, 24, 24, 0.1);
     background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+    background-color: rgb(251, 26, 26); 
 }
 
 .navbar-toggler:checked[b-zswk0q6kaa] {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: black;
 }
 
 .top-row[b-zswk0q6kaa] {

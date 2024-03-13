@@ -1,7 +1,99 @@
-﻿@page "/"
-
+﻿@* @page "/" *@
+@* 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hi there! <br></h1>
 
-Welcome to your new app.
+ <p>Add, Edit, Archive and View Company Names and Contacts</p>
+
+@page "/companymanager" *@
+
+@page "/"
+<h1>Hi there! <br></h1>
+
+ <p>Add, Edit, Archive and View Company Names and Contacts</p>
+
+<form @onsubmit="AddCompany">
+    <div class="form-group">
+        <label for="companyName">Company Name:</label>
+        <input type="text" class="form-control" @bind="newCompanyName" required />
+    </div>
+    <div class="form-group">
+        <label for="contactName">Contact Name:</label>
+        <input type="text" class="form-control" @bind="newContactName" required />
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary">Edit</button>
+    <button type="button" class="btn btn-primary" @onclick="AddContact">Add More Contacts</button>
+    <button type="button" class="btn btn-primary">Archive</button>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-success">Add Company</button>
+   
+    
+</form>
+<br>
+<h3>Companies</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Contact Names</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in companies)
+        {
+            <tr>
+                <td>@company.Name</td>
+                <td>@string.Join(", ", company.Contacts)</td>
+                <td>
+                    <button class="btn btn-info" @onclick="() => EditCompany(company)">Edit</button>
+                    <button class="btn btn-warning" @onclick="() => ArchiveCompany(company)">Archive</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private string newCompanyName = "";
+    private string newContactName = "";
+    private List<Company> companies = new List<Company>();
+
+    private class Company
+    {
+        public string Name { get; set; }
+        public List<string> Contacts { get; set; } = new List<string>();
+    }
+
+    private void AddContact()
+    {
+        if (!string.IsNullOrWhiteSpace(newContactName))
+        {
+            companies[^1].Contacts.Add(newContactName);
+            newContactName = "";
+        }
+    }
+
+    private void AddCompany()
+    {
+        if (!string.IsNullOrWhiteSpace(newCompanyName) && companies[^1].Contacts.Count > 0)
+        {
+            companies.Add(new Company { Name = newCompanyName });
+            newCompanyName = "";
+            StateHasChanged();
+        }
+    }
+
+    private void EditCompany(Company company)
+    {
+        // Implementation for editing a company
+    }
+
+    private void ArchiveCompany(Company company)
+    {
+        // Implementation for archiving a company
+    }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Contacts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"], input[type="submit"] {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .edit-btn, .archive-btn {
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Company</h2>
+    <form id="addCompanyForm">
+        <label for="companyName">Company Name:</label><br>
+        <input type="text" id="companyName" name="companyName" required><br>
+        <label for="contactName">Contact Name:</label><br>
+        <input type="text" id="contactName" name="contactName" required><br>
+        <input type="button" value="Add Contact" onclick="addContact()">
+        <input type="submit" value="Add Company">
+    </form>
+
+    <h2>Companies</h2>
+    <table id="companyTable">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Contact Names</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="companyList">
+            <!-- Companies will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        function addContact() {
+            const contactNameInput = document.getElementById("contactName");
+            const contactName = contactNameInput.value.trim();
+            if (contactName !== "") {
+                const contactList = document.getElementById("contactList");
+                const newContact = document.createElement("li");
+                newContact.textContent = contactName;
+                contactList.appendChild(newContact);
+                contactNameInput.value = "";
+            }
+        }
+
+        document.getElementById("addCompanyForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const companyName = document.getElementById("companyName").value.trim();
+            if (companyName === "") {
+                alert("Please enter a company name.");
+                return;
+            }
+            const contactListItems = document.querySelectorAll("#contactList li");
+            if (contactListItems.length === 0) {
+                alert("Please add at least one contact name.");
+                return;
+            }
+            const contacts = Array.from(contactListItems).map(item => item.textContent);
+            addCompany(companyName, contacts);
+            document.getElementById("addCompanyForm").reset();
+        });
+
+        function addCompany(companyName, contacts) {
+            const companyTable = document.getElementById("companyList");
+            const newRow = companyTable.insertRow();
+            const nameCell = newRow.insertCell(0);
+            const contactsCell = newRow.insertCell(1);
+            const actionCell = newRow.insertCell(2);
+            nameCell.textContent = companyName;
+            contactsCell.textContent = contacts.join(", ");
+            actionCell.innerHTML = '<span class="edit-btn" onclick="editCompany(this)">Edit</span> | <span class="archive-btn" onclick="archiveCompany(this)">Archive</span>';
+        }
+
+        function editCompany(button) {
+            const row = button.closest("tr");
+            const companyName = row.cells[0].textContent;
+            const contactNames = row.cells[1].textContent.split(", ");
+            document.getElementById("companyName").value = companyName;
+            const contactList = document.getElementById("contactList");
+            contactList.innerHTML = "";
+            contactNames.forEach(contact => {
+                const newContact = document.createElement("li");
+                newContact.textContent = contact;
+                contactList.appendChild(newContact);
+            });
+            row.remove();
+        }
+
+        function archiveCompany(button) {
+            const row = button.closest("tr");
+            row.remove();
+        }
+    </script>
+</body>
+</html>
